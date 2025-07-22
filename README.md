@@ -975,13 +975,14 @@ print(generated_text)
 ## Basketball Evaluation
 
 This repository includes a small utility to evaluate basketball video results.
-Prepare a JSON file with model predictions (`--pred-file`) and another with
-ground truth (`--gt-file`). Then run:
+The script loads the ground truth examples, runs the model to obtain
+predictions and computes the accuracy. Use it like:
 
 ```bash
 python evaluation/basketball/evaluate_basketball.py \
-    --pred-file pred.json \
+    --model-path /path/to/QwenVL \
     --gt-file gt.json \
+    --pred-file pred.json \
     --output-file basketball_eval.csv
 ```
 
