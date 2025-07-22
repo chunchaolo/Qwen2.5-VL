@@ -972,6 +972,21 @@ generated_text = outputs[0].outputs[0].text
 print(generated_text)
 ```
 
+## Basketball Evaluation
+
+This repository includes a small utility to evaluate basketball video results.
+Prepare a JSON file with model predictions (`--pred-file`) and another with
+ground truth (`--gt-file`). Then run:
+
+```bash
+python evaluation/basketball/evaluate_basketball.py \
+    --pred-file pred.json \
+    --gt-file gt.json \
+    --output-file basketball_eval.csv
+```
+
+The script prints per-item accuracy and overall accuracy. If `--output-file` is
+given, a CSV with detailed comparison is saved.
 
 ## 🐳 Docker
 
