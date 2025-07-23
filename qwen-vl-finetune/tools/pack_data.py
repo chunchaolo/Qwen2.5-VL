@@ -64,7 +64,8 @@ class MultimodalProcessor:
         processor = self._configure_processor(self.data_args.max_pixels, self.data_args.min_pixels)
         image = Image.open(image_path).convert('RGB')
         visual_processed = processor.preprocess(images=image, return_tensors='pt')
-        return visual_processed['image_grid_thw'].prod() // 4
+        # preprocess returns tensors. convert to python int for later json dump
+        return int((visual_processed['image_grid_thw'].prod() // 4).item())
 
     def process_video(self, video_file):
         video_path = os.path.join(self.data_args.data_path, video_file)
@@ -80,7 +81,8 @@ class MultimodalProcessor:
         frame_batch = decoder.get_frames_at(indices=frame_idx)
         video_frames_numpy = frame_batch.data.cpu().numpy()
         visual_processed = processor.preprocess(images=None, videos=video_frames_numpy, return_tensors='pt')
-        return visual_processed['video_grid_thw'].prod() // 4
+        # ensure the number of tokens is a python int
+        return int((visual_processed['video_grid_thw'].prod() // 4).item())
 
 
 def calculate_tokens(conversation, processor, tokenizer):
@@ -100,7 +102,8 @@ def calculate_tokens(conversation, processor, tokenizer):
         videos = conversation['video'] if isinstance(conversation['video'], list) else [conversation['video']]
         for video_file in videos:
             total_tokens += processor.process_video(video_file)
-    return total_tokens
+    # ensure return type is python int
+    return int(total_tokens)
 
 
 def pack_data(data_list, pack_length):
