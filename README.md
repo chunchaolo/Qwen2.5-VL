@@ -973,6 +973,25 @@ print(generated_text)
 ```
 
 
+## YOLO Classification Example
+
+We provide helper scripts to convert the conversational video dataset to the
+YOLO&nbsp;11 classification format and train a classifier using the
+`ultralytics` package.
+
+### Convert the dataset
+
+```bash
+python scripts/convert_video_to_yolo.py --input dataset.json --output yolo_data
+```
+
+### Train the model
+
+```bash
+python scripts/train_yolo_classification.py --data-dir yolo_data --epochs 50
+```
+
+
 ## 🐳 Docker
 
 To simplify the deploy process, we provide docker images with pre-build environments: [qwenllm/qwenvl](https://hub.docker.com/r/qwenllm/qwenvl). You only need to install the driver and download model files to launch demos.
