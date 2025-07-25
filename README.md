@@ -991,6 +991,12 @@ python scripts/convert_video_to_yolo.py --input dataset.json --output yolo_data
 python scripts/train_yolo_classification.py --data-dir yolo_data --epochs 50
 ```
 
+### Evaluate the model
+
+```bash
+python scripts/eval_yolo_classification.py --data-dir yolo_data --weights path/to/best.pt
+```
+
 
 ## 🐳 Docker
 
